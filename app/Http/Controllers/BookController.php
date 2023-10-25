@@ -22,7 +22,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view("books.create");
     }
 
     /**
@@ -31,11 +31,13 @@ class BookController extends Controller
     public function store(Request $request)
     {
         Book::create([
-            "title" => "Harry Potter",
-            "image" => "https://images.ctfassets.net/usf1vwtuqyxm/6S51pK7uwnyhkS9Io9DsAn/320c162c5150f853b8d8568c4715dcef/English_Harry_Potter_7_Epub_9781781100264.jpg?w=914&q=70&fm=jpg",
-            "author" => "J.K. Rowling",
+            "title" => $request->title,
+            "image" => $request->image,
+            "author_id" => $request->author_id,
             "status" => "Published",
         ]);
+
+        return redirect()->route("books.index");
     }
 
     /**
