@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    public function show(Author $author)
+    public function show($id)
     {
-        return view('authors.show');
+        $author = Author::with('books')
+            ->where('id', $id)
+            ->first();
+        return view('authors.show' ,compact('author'));
     }
 }
